@@ -10,9 +10,7 @@
       </div>
 
       <div class="app-name">
-        <h5 class="q-pa-sm-md logo-text text-bold text-italic text-center">
-          {{ appName }}
-        </h5>
+        <h5 class="q-pa-sm-md logo-text text-bold text-italic text-center">{{ appName }}</h5>
       </div>
 
       <q-form @submit="onSubmit" class="q-gutter-md">
@@ -25,10 +23,8 @@
           :rules="[val => (val && val.length > 0) || 'Field is required']"
         >
           <template v-slot:prepend>
-            <q-icon
-              name="person_pin
-            "
-            />
+            <q-icon name="person_pin
+            " />
           </template>
         </q-input>
         <q-input
@@ -41,10 +37,8 @@
           :rules="[val => (val && val.length > 0) || 'Field is required']"
         >
           <template v-slot:prepend>
-            <q-icon
-              name="person_pin
-            "
-            />
+            <q-icon name="person_pin
+            " />
           </template>
         </q-input>
         <q-input
@@ -62,10 +56,8 @@
           ]"
         >
           <template v-slot:prepend>
-            <q-icon
-              name="mail
-                      "
-            />
+            <q-icon name="mail
+                      " />
           </template>
         </q-input>
 
@@ -83,13 +75,10 @@
           ]"
         >
           <template v-slot:prepend>
-            <q-icon
-              name="fas fa-phone
-            "
-            />
+            <q-icon name="fas fa-phone
+            " />
           </template>
         </q-input>
-
 
         <q-input
           clearable
@@ -104,10 +93,8 @@
           ]"
         >
           <template v-slot:prepend>
-            <q-icon
-              name="vpn_key
-            "
-            />
+            <q-icon name="vpn_key
+            " />
           </template>
         </q-input>
         <q-input
@@ -124,10 +111,8 @@
           ]"
         >
           <template v-slot:prepend>
-            <q-icon
-              name="vpn_key
-            "
-            />
+            <q-icon name="vpn_key
+            " />
           </template>
         </q-input>
 
@@ -140,6 +125,7 @@
           <q-btn
             label="Sign-Up"
             type="submit"
+            :loading="loading"
             rounded
             class="q-px-xl q-py-xs"
             color="primary"
@@ -151,33 +137,39 @@
 </template>
 
 <script>
-
 export default {
   name: "login",
   data() {
     return {
       appName: "Officeworks",
       gender: "Female",
-      confirmPassword: "",
+      confirmPassword: "12345678",
       userData: {
-        surname: "",
-        name: "",
-        email: "",
-        phone: "",
-        password: "",
+        surname: "vic",
+        name: "civ",
+        email: "icv@gmail.com",
+        phone: "0982393y738a",
+        password: "12345678",
         gender: "Male"
-      }
+      },
+      loading: false
     };
   },
 
   methods: {
     onSubmit() {
-      console.log(this.userData);
+      this.loading = true;
+      this.$store
+        .dispatch("user/register", this.userData)
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(err => {
+          this.loading = false;
+        });
     }
   },
-  mounted() {
-    this.onSubmit();
-  }
+  mounted() {}
 };
 </script>
 

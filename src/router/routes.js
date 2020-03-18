@@ -1,18 +1,19 @@
+
 const routes = [{
     path: '/',
     redirect: '/login',
     component: () => import('layouts/InitialLayout.vue'),
     children: [{
         path: '/login',
-        component: () => import('pages/Login.vue')
+        component: () => import('pages/Account/Login.vue')
       },
       {
         path: '/register',
-        component: () => import('pages/Register.vue')
+        component: () => import('pages/Account/Register.vue')
       },
       {
         path: '/reset-password',
-        component: () => import('pages/Resetpassword.vue')
+        component: () => import('pages/Account/Resetpassword.vue')
       },
     ]
   },
@@ -89,7 +90,7 @@ const routes = [{
 if (process.env.MODE !== 'ssr') {
   routes.push({
     path: '*',
-    component: () => import('pages/Error404.vue')
+    component: () => import('pages/Errors/404.vue')
   })
 }
 

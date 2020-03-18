@@ -13,11 +13,10 @@
           <h5 class="q-pa-sm-md logo-text text-bold text-italic text-center">{{appName}}</h5>
         </div>
 
-        <q-form @submit="onSubmit" class="q-gutter-md">
-          <q-input filled v-model="emailOrUsername" label="Username or Email">
+        <q-form @submit="login" class="q-gutter-md">
+          <q-input filled v-model="identity" label="Username or Email">
             <template v-slot:append>
-              <q-icon name="mail
-" />
+              <q-icon name="mail" />
             </template>
           </q-input>
 
@@ -31,7 +30,14 @@
           <q-toggle v-model="rememberMe" label="Remember me" />
 
           <div class="login-btn">
-            <q-btn label="Sign-In" rounded class="q-px-xl q-py-xs" type="submit" color="primary" />
+            <q-btn
+              label="Sign-In"
+              :loading="loading"
+              rounded
+              class="q-px-xl q-py-xs"
+              type="submit"
+              color="primary"
+            />
             <!-- <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" /> -->
           </div>
         </q-form>
@@ -56,13 +62,27 @@ export default {
     return {
       appName: "Officeworks",
       password: "",
-      emailOrUsername: "",
-      rememberMe: false
+      identity: "" /* identity: it can be the userName or emailAddress */,
+      rememberMe: false,
+      loading: false
     };
   },
   methods: {
-    onSubmit() {
-      console.log("hello from login");
+    login() {
+      this.loading = true;
+      var userData = {
+        password: this.password,
+        identity: this.identity,
+        rememberMe: this.rememberMe
+      };
+      this.$store
+        .dispatch("user/login", userData)
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(err => {
+          this.loading = false;
+        });
     }
   }
 };

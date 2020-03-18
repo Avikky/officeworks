@@ -13,7 +13,7 @@
         <h5 class="q-pa-sm-md logo-text text-bold text-italic text-center">{{ appName }}</h5>
       </div>
 
-      <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
+      <q-form @submit="onSubmit" class="q-gutter-md">
         <q-input filled type="email" label="Enter Your Email" />
 
         <div class="reset-btn">
