@@ -1,96 +1,111 @@
-
-const routes = [{
+const routes = [
+  {
     path: '/',
     redirect: '/login',
     component: () => import('layouts/InitialLayout.vue'),
-    children: [{
+    children: [
+      {
         path: '/login',
-        component: () => import('pages/Account/Login.vue')
+        component: () => import('pages/Account/Login.vue'),
       },
       {
         path: '/register',
-        component: () => import('pages/Account/Register.vue')
+        component: () => import('pages/Account/Register.vue'),
       },
       {
         path: '/reset-password',
-        component: () => import('pages/Account/Resetpassword.vue')
+        component: () => import('pages/Account/Resetpassword.vue'),
       },
-    ]
+    ],
   },
   {
     path: '/dashboard',
+    meta: { requiresAuth: true },
     component: () => import('layouts/MainLayout.vue'),
-    children: [{
+    children: [
+      {
         path: '/dashboard',
-        component: () => import('pages/Dashboard.vue')
+        component: () => import('pages/Dashboard.vue'),
       },
-
-    ]
+    ],
   },
   {
     path: '/notification',
     component: () => import('layouts/NotificationLayout.vue'),
-    children: [{
-      path: '/notification',
-      component: () => import('pages/Notification.vue'),
-    }]
+    children: [
+      {
+        path: '/notification',
+        component: () => import('pages/Notification.vue'),
+      },
+    ],
   },
   {
     path: '/messages',
     component: () => import('layouts/MessageLayout.vue'),
-    children: [{
-      path: '/messages',
-      component: () => import('pages/Messages.vue')
-    }]
+    children: [
+      {
+        path: '/messages',
+        component: () => import('pages/Messages.vue'),
+      },
+    ],
   },
   {
     path: '/search-user',
     component: () => import('layouts/SearchLayout.vue'),
-    children: [{
-      path: '/search-user',
-      component: () => import('pages/SearchUsers.vue')
-    }]
+    children: [
+      {
+        path: '/search-user',
+        component: () => import('pages/SearchUsers.vue'),
+      },
+    ],
   },
   {
     path: '/request',
     component: () => import('layouts/RequestLayout.vue'),
-    children: [{
-      path: '/request',
-      component: () => import('pages/Request.vue')
-    }]
+    children: [
+      {
+        path: '/request',
+        component: () => import('pages/Request.vue'),
+      },
+    ],
   },
   {
     path: '/expenses',
     component: () => import('layouts/ExpensesLayout.vue'),
-    children: [{
-      path: '/expenses',
-      component: () => import('pages/Expenses.vue')
-    }]
+    children: [
+      {
+        path: '/expenses',
+        component: () => import('pages/Expenses.vue'),
+      },
+    ],
   },
   {
     path: '/edit-expenses',
     component: () => import('layouts/EditExpensesLayout.vue'),
-    children: [{
-      path: '/edit-expenses',
-      component: () => import('pages/EditExpenses.vue')
-    }]
+    children: [
+      {
+        path: '/edit-expenses',
+        component: () => import('pages/EditExpenses.vue'),
+      },
+    ],
   },
   {
     path: '/project',
     component: () => import('layouts/ProjectLayout.vue'),
-    children: [{
-      path: '/project',
-      component: () => import('pages/Projects.vue')
-    }]
-  }
-
+    children: [
+      {
+        path: '/project',
+        component: () => import('pages/Projects.vue'),
+      },
+    ],
+  },
 ]
 
 // Always leave this as last one
 if (process.env.MODE !== 'ssr') {
   routes.push({
     path: '*',
-    component: () => import('pages/Errors/404.vue')
+    component: () => import('pages/Errors/404.vue'),
   })
 }
 
